@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dbsample.mapper.BookMapper">
-    <select id="getAllBooks" parameterType="int" resultType="com.example.dbsample.entity.Book">
-        SELECT id, title, author FROM books WHERE id = #{id}
+    <select id="getAllBooks" resultType="com.example.dbsample.entity.Book">
+        SELECT id, title, author FROM books ORDER BY id
     </select>
 </mapper>
