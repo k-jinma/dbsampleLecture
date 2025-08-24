@@ -4,4 +4,8 @@
     <select id="getAllBooks" resultType="com.example.dbsample.entity.Book">
         SELECT id, title, author FROM books ORDER BY id
     </select>
+
+    <select id="getBookById" resultType="com.example.dbsample.entity.Book">
+        SELECT id, title, author FROM books WHERE id = #{id}
+    </select>
 </mapper>
