@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class BookController {
 
     // DI
-    private final BookMapper bookMapper;
+    private final BookMapper b;
 
     // メニュー画面表示
     @GetMapping("/")
@@ -27,14 +27,13 @@ public class BookController {
     @GetMapping("/list")
     public String showAllBooks(Model model){
         model.addAttribute("message","一覧表示");
-        model.addAttribute("books", bookMapper.getAllBooks());
+        model.addAttribute("books", b.getAllBooks());
         return "book/success";
     }
 
     @GetMapping("/detail/{id}")
     public String getMethodName(@PathVariable("id") int id, Model model) {
-        model.addAttribute("message", "詳細表示");
-        model.addAttribute("book", bookMapper.getBookById(id));
+        b.deleteBookById(2);
         return "book/success";
     }
     
