@@ -8,26 +8,25 @@ import com.example.dbsample.mapper.BookMapper;
 
 import lombok.RequiredArgsConstructor;
 
-
-
 @Controller
 @RequiredArgsConstructor
 public class BookController {
-
-    // DI
-    private final BookMapper bookMapper;
+    
+    private final BookMapper b;
 
     // メニュー画面表示
     @GetMapping("/")
     public String showIndex(){
+
         return "book/index";
     }
 
-    // 書籍一覧表示
     @GetMapping("/list")
     public String showAllBooks(Model model){
-        model.addAttribute("message","一覧表示");
-        model.addAttribute("books", bookMapper.getAllBooks());
+
+        model.addAttribute("message", "一覧表示");
+        model.addAttribute("books", b.getAllBooks());
+
         return "book/success";
     }
 
