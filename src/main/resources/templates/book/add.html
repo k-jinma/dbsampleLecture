@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>書籍登録</title>
+</head>
+<body>
+    <h1>書籍登録フォーム</h1>
+    <form action="/add" method="post">
+        <label for="title">タイトル:</label>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="author">著者名:</label>
+        <input type="text" id="author" name="author" required><br><br>
+
+        <label for="publisher">出版社:</label>
+        <select id="publisher" name="publisherId" required>
+            <option value="">選択してください</option>
+            <!-- コントローラから渡されたpublishersリストを表示 -->
+            <th:block th:each="pub : ${publishers}">
+                <option th:value="${pub.id}" th:text="${pub.name}"></option>
+            </th:block>
+        </select><br><br>
+
+        <button type="submit">登録</button>
+    </form>
+</body>
+</html>

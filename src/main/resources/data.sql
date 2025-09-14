@@ -1,15 +1,15 @@
--- publishersテーブルへのデータ登録
-INSERT INTO publishers (name) VALUES ('技術評論社');
-INSERT INTO publishers (name) VALUES ('Technology評論社');
+-- Insert data into publishers table
+INSERT INTO publishers (name) VALUES ('Gijutsu Hyoronsha');
+INSERT INTO publishers (name) VALUES ('Technology Hyoronsha');
 
--- booksテーブルへのデータ登録
-INSERT INTO books (title, author, publisher_id) VALUES ('新人研修あるある', '山田太郎', 1);
-INSERT INTO books (title, author, publisher_id) VALUES ('こんなDBエンジニアは嫌だ', '佐藤花子', 2);
-INSERT INTO books (title, author, publisher_id) VALUES ('本当にあったIT業界トラブル','鈴木一郎', 1);
+-- Insert data into books table
+INSERT INTO books (title, author, publisher_id) VALUES ('Common Situations in New Employee Training', 'Taro Yamada', 1);
+INSERT INTO books (title, author, publisher_id) VALUES ('DB Engineers You Dont Want to Work With', 'Hanako Sato', 2);
+INSERT INTO books (title, author, publisher_id) VALUES ('Real Troubles in the IT Industry', 'Ichiro Suzuki', 1);
 
--- reviewsテーブルへのデータ登録
-INSERT INTO reviews (book_id, review_text) VALUES (1, '非常に役立つ本でした。');
-INSERT INTO reviews (book_id, review_text) VALUES (2, 'こんなDBエンジニアがいることに驚愕しました。');
-INSERT INTO reviews (book_id, review_text) VALUES (2, '自分の現場には来てほしくないです。');
-INSERT INTO reviews (book_id, review_text) VALUES (2, '同じ様な方が、私の現場にいます。。。');
-INSERT INTO reviews (book_id, review_text) VALUES (3, '業界の闇を知るにはいい本です。');
+-- Insert data into reviews table
+INSERT INTO reviews (book_id, review_text) VALUES (1, 'This book was very helpful.');
+INSERT INTO reviews (book_id, review_text) VALUES (2, 'I was shocked that such DB engineers exist.');
+INSERT INTO reviews (book_id, review_text) VALUES (2, 'I hope they never come to my workplace.');
+INSERT INTO reviews (book_id, review_text) VALUES (2, 'There is someone like this at my workplace...');
+INSERT INTO reviews (book_id, review_text) VALUES (3, 'A good book to learn about the dark side of the IT industry.');
