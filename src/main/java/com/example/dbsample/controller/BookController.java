@@ -4,14 +4,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.dbsample.entity.Publisher;
-import com.example.dbsample.mapper.BookMapper; // 追加
+import com.example.dbsample.form.AddForm;
+import com.example.dbsample.mapper.BookMapper;
 import com.example.dbsample.mapper.PublisherMapper;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 
@@ -53,7 +55,7 @@ public class BookController {
 
 
     @GetMapping("/add")
-    public String addBook(Model model){
+    public String addBook(AddForm addForm,Model model){
         // ビューを表示する前に、出版社情報をDBから取得してモデルに追加
         List<Publisher> result = p.getAllPublishers();
         model.addAttribute("publishers", result);
@@ -62,13 +64,24 @@ public class BookController {
 
     @PostMapping("/add")
     public String postMethodName(
-        @RequestParam("title") String title,
-        @RequestParam("author") String author,
-        @RequestParam("publisherId") int publisherId,
+        @Valid AddForm addForm, // 説明: バリデーションを実行 addFormにはフォームの入力値がセットされている
+        BindingResult bindingResult, // 説明: バリデーション結果を受け取る
+        // @RequestParam("title") String title,
+        // @RequestParam("author") String author,
+        // @RequestParam("publisherId") int publisherId,
         Model model
     ) {
-        b.insertBook2(title, author, publisherId);
-
+        
+        if(bindingResult.hasErrors()){
+            // エラー時は出版社リストを再セットして画面へ戻す
+            // ビューを表示する前に、出版社情報をDBから取得してモデルに追加
+            List<Publisher> result = p.getAllPublishers();
+            model.addAttribute("publishers", result);
+            return "book/add";
+        }
+        
+        b.insertBook2(addForm.getTitle(), addForm.getAuthor(), addForm.getPublisherId());
+        
         return "book/index";
     }
     
