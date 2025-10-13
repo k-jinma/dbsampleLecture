@@ -36,6 +36,7 @@ public class SecurityConfig {
         .password(passwordEncoder().encode("user"))
         .roles("USER")
         .build();
+        
     return new InMemoryUserDetailsManager(admin, user);
   }
 
@@ -44,8 +45,8 @@ public class SecurityConfig {
     http.formLogin(login -> login //  フォーム認証を使う
         .permitAll())
         .authorizeHttpRequests(authz -> authz
-            .requestMatchers("/css/**").permitAll() // CSSファイルは認証不要で使えるようにする
-            //.requestMatchers("/").permitAll() //  トップページは認証不要
+            //.requestMatchers("/css/**").permitAll() // CSSファイルは認証不要で使えるようにする
+            //.requestMatchers("/").permitAll() //  トップページは認証
             .anyRequest().authenticated() //  他のURLはログイン後アクセス可能
         );
 
