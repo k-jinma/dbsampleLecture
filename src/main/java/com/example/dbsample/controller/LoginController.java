@@ -10,6 +10,7 @@ import com.example.dbsample.form.LoginForm;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
+	
 	@GetMapping
 	public String showLogin(@ModelAttribute LoginForm form) {
 		// templatesフォルダ配下のlogin.htmlに遷移

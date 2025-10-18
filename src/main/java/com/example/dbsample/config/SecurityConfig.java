@@ -4,11 +4,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+	private final UserDetailsService userDetailsService;
+	private final PasswordEncoder passwordEncoder;
+
+	public SecurityConfig(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+		this.userDetailsService = userDetailsService;
+		this.passwordEncoder = passwordEncoder;
+	}
 
 	// SecurityFilterChainのBean定義
 	@Bean
@@ -24,28 +34,29 @@ public class SecurityConfig {
 			.formLogin(form -> form
 			// カスタムログインページのURLを指定
 			.loginPage("/login")
-      // ログイン処理のURLを指定
+			// ログイン処理のURLを指定
 			.loginProcessingUrl("/authentication")
 			// ユーザー名のname属性を指定
 			.usernameParameter("usernameInput")
 			// パスワードのname属性を指定
 			.passwordParameter("passwordInput")
-			// ログイン成功時のリダイレクト先を指定
-			.defaultSuccessUrl("/")
-			// ログイン失敗時のリダイレクト先を指定
-			.failureUrl("/login?error"))
-      
-			// ★ログアウト設定
-      .logout(logout -> logout
-      // ログアウトを処理するURLを指定
-      .logoutUrl("/logout")
-      // ログアウト成功時のリダイレクト先を指定
-      .logoutSuccessUrl("/login?logout")
-      // ログアウト時にセッションを無効にする
-      .invalidateHttpSession(true)
-      // ログアウト時にCookieを削除する
-      .deleteCookies("JSESSIONID")
-			);
+            // ログイン成功時のリダイレクト先を指定
+            .defaultSuccessUrl("/")
+            // ▽▽▽▽▽ リストA.6 ▽▽▽▽▽
+            // ログイン失敗時のリダイレクト先を指定
+            .failureUrl("/login?error"))
+            // ★ログアウト設定
+            .logout(logout -> logout
+            // ログアウトを処理するURLを指定
+            .logoutUrl("/logout")
+            // ログアウト成功時のリダイレクト先を指定
+            .logoutSuccessUrl("/login?logout")
+            // ログアウト時にセッションを無効にする
+            .invalidateHttpSession(true)
+            // ログアウト時にCookieを削除する
+            .deleteCookies("JSESSIONID")
+            );
+			// △△△△△ リストA.6 △△△△△
 		return http.build();
 	}
 }
