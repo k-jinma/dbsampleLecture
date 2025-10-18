@@ -7,16 +7,13 @@
 </head>
 <body>
     <h1>書籍管理メニュー</h1>
-    <div sec:authentication="name"></div>
     <ul>
         <li><a href="/list">書籍一覧表示</a></li>
-        <div sec:authorize="hasRole('ADMIN')">
-            認証された場合のみ表示
-            <li><a href="/add">書籍登録</a></li>
-        </div>
+        <li><a href="/add">書籍登録</a></li>
     </ul>
 
-    <form th:action=@{/logout} method="post">
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
         <input type="submit" value="ログアウト">
     </form>
 </body>
